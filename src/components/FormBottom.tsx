@@ -1,5 +1,5 @@
 "use client"
-import SendIcon from "@mui/icons-material/Mylocation";
+import MyLocationIcon from '@mui/icons-material/MyLocation';
 import { createContext, useContext } from "react";
 const MyContext = createContext('');
 var sharedData ="";
@@ -28,7 +28,7 @@ export default function FormBottom({ children }:any)
         <input type="text" className="i-loc"/>
         <button type="submit" 
           color="primary" onClick={GetLocation}
-          >{<SendIcon />}</button>
+          >{<MyLocationIcon />}</button>
       </div>
       <div className="form-layout sm">
         <label className="sm-lbl">No of pandals</label>

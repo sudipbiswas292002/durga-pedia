@@ -2,7 +2,6 @@ import './globals.css'
 import './form.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-import 'material-icons/iconfont/material-icons.css';
 
 const inter = Inter({ subsets: ['latin'] })
 
