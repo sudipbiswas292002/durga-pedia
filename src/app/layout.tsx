@@ -2,7 +2,7 @@ import './globals.css'
 import './form.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-
+import { MyProvider }  from '../components/MyContext';
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
@@ -18,7 +18,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
+      <MyProvider>
         {children}
+        </MyProvider>
         </body>
     </html>
   )

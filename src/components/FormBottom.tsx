@@ -1,9 +1,75 @@
 "use client"
 import MyLocationIcon from '@mui/icons-material/MyLocation';
-import { createContext, useContext } from "react";
-const MyContext = createContext('');
-var sharedData ="";
-function GetLocation()
+import { createContext, useContext, useEffect, useState } from "react";
+import MyContext from './MyContext';
+import {
+  useJsApiLoader,
+  GoogleMap,
+  Marker,
+  Autocomplete,
+  DirectionsRenderer,
+} from '@react-google-maps/api'
+
+export default function FormBottom()
+{
+  const { setContextData }:any = useContext(MyContext);
+  const googleMapsApiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
+console.log(googleMapsApiKey);
+const [address, setAddress] = useState('');
+const [addressbool, setAddressbool] = useState(false);
+const [coordinates, setCoordinates] = useState<{ lat: number | null; lng: number | null }>(
+  { lat: null, lng: null }
+);
+
+// useEffect(() => {
+  
+// }, [addressbool]);
+const getlatlng=async (e: { preventDefault: () => void; })=>{
+e.preventDefault();
+  if (address.trim() !== '') {
+    const apiKey = 'AIzaSyDj2cR40F6xZo8mTepkyEpJl8BGVNDZ2qk';
+    const apiUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(
+      address
+    )}&key=${apiKey}`;
+
+    fetch(apiUrl)
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.status === 'OK' && data.results.length > 0) {
+          const result = data.results[0];
+          const { lat, lng } = result.geometry.location;
+          setCoordinates({ lat, lng });
+        } else {
+          console.log(data);
+          setCoordinates({ lat: null, lng: null });
+          console.error('Unable to retrieve coordinates for the given address.');
+        }
+      })
+      .catch((error) => {
+        console.error('Error fetching data from Google Maps API:', error);
+      });
+  } else {
+    // Reset coordinates when the address is empty
+    setCoordinates({ lat: null, lng: null });
+  }
+}
+
+// const handleInputChange = (e:any) => {
+//   setAddress(e.target.value);
+// };
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const {isLoaded }:any = useJsApiLoader({
+      googleMapsApiKey:"AIzaSyDj2cR40F6xZo8mTepkyEpJl8BGVNDZ2qk",
+      libraries: ['places'],
+    });
+  if (!isLoaded) {
+  return <></>
+}
+    // Rest of your code using 'isLoaded'
+  
+  
+  //getting latand lang cordinates on button click
+  function GetLocation()
 {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(successFunction);
@@ -15,20 +81,32 @@ function successFunction(position:any) {
   var lat = position.coords.latitude;
   var long = position.coords.longitude;
   console.log('Your latitude is :'+lat+' and longitude is '+long);
+  setContextData('Your latitude is :'+lat+' and longitude is '+long);
 }
-export default function FormBottom({ children }:any)
-{
-  
+//ends  
+    //onKeyDown={handleInputChange}  
     return(
     <>
     <div className="container">
+      <form onSubmit={getlatlng}>
+    {coordinates && (
+        <p>
+          Latitude: {coordinates.lat}, Longitude: {coordinates.lng}
+        </p>
+      )}
     <div className="item1">
       <div className="form-layout lg">
         <label className="lg-lbl">Your start location</label>
-        <input type="text" className="i-loc"/>
-        <button type="submit" 
+        <div className="sm-row">
+        <Autocomplete>
+        <input type="text" className="i-loc" value={address} onChange={(e)=>setAddress(e.target.value)}
+       /> 
+       
+        </Autocomplete>
+        <button className="lc-btn"type="submit" 
           color="primary" onClick={GetLocation}
           >{<MyLocationIcon />}</button>
+          </div>
       </div>
       <div className="form-layout sm">
         <label className="sm-lbl">No of pandals</label>
@@ -38,15 +116,15 @@ export default function FormBottom({ children }:any)
          <label className="ch-lbl">Start point as your end point</label>
         <input className="i-ch" type="checkbox"/>
       </div>
+      <div className="form-layout btnsm">
+      <button className="sbm-btn" type="submit" 
+          color="primary" 
+          >Get Roadmap</button>
+      </div>
     </div>
-    
+    </form>
   </div>
-  <MyContext.Provider value={sharedData}>
-  { children }
-    </MyContext.Provider>
+
   </>
   )
-}
-export function useMyContext() {
-  return useContext(MyContext);
 }

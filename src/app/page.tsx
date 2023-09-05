@@ -1,4 +1,4 @@
-import FormBottom, { useMyContext } from "@/components/FormBottom";
+import FormBottom from "@/components/FormBottom";
 
 export default function Home() {
  
