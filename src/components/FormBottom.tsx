@@ -1,6 +1,6 @@
 "use client"
 import MyLocationIcon from '@mui/icons-material/MyLocation';
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useRef, useState } from "react";
 import MyContext from './MyContext';
 import {
   useJsApiLoader,
@@ -15,8 +15,7 @@ export default function FormBottom()
   const { setContextData }:any = useContext(MyContext);
   const googleMapsApiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
 console.log(googleMapsApiKey);
-const [address, setAddress] = useState('');
-const [addressbool, setAddressbool] = useState(false);
+const address = useRef<HTMLInputElement | null>(null);
 const [coordinates, setCoordinates] = useState<{ lat: number | null; lng: number | null }>(
   { lat: null, lng: null }
 );
@@ -26,10 +25,10 @@ const [coordinates, setCoordinates] = useState<{ lat: number | null; lng: number
 // }, [addressbool]);
 const getlatlng=async (e: { preventDefault: () => void; })=>{
 e.preventDefault();
-  if (address.trim() !== '') {
+  if (address.current && address.current.value.trim() !== '') {
     const apiKey = 'AIzaSyDj2cR40F6xZo8mTepkyEpJl8BGVNDZ2qk';
     const apiUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(
-      address
+      address.current.value
     )}&key=${apiKey}`;
 
     fetch(apiUrl)
@@ -64,10 +63,7 @@ e.preventDefault();
     });
   if (!isLoaded) {
   return <></>
-}
-    // Rest of your code using 'isLoaded'
-  
-  
+}  
   //getting latand lang cordinates on button click
   function GetLocation()
 {
@@ -78,13 +74,14 @@ e.preventDefault();
 }
 }
 function successFunction(position:any) {
+         
   var lat = position.coords.latitude;
   var long = position.coords.longitude;
+  setCoordinates({ lat:lat, lng:long });
   console.log('Your latitude is :'+lat+' and longitude is '+long);
   setContextData('Your latitude is :'+lat+' and longitude is '+long);
 }
-//ends  
-    //onKeyDown={handleInputChange}  
+//ends   
     return(
     <>
     <div className="container">
@@ -99,7 +96,7 @@ function successFunction(position:any) {
         <label className="lg-lbl">Your start location</label>
         <div className="sm-row">
         <Autocomplete>
-        <input type="text" className="i-loc" value={address} onChange={(e)=>setAddress(e.target.value)}
+        <input ref={address} type="text" className="i-loc"  
        /> 
        
         </Autocomplete>
