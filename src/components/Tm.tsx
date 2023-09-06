@@ -1,7 +1,11 @@
-// import { useMyContext } from "./FormBottom";
+import React from 'react'
 
-// export default function Tm()
-// {
-//     const sharedData = useMyContext();
-//     console.log(sharedData);
-// }
+const Tm = () => {
+    return (
+        <div>
+
+        </div>
+    )
+}
+
+export default Tm
