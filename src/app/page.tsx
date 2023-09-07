@@ -1,12 +1,10 @@
 import FormBottom from "@/components/FormBottom";
-import HomeLoader from "@/components/HomeLoader";
-import { Suspense } from "react";
+import TopMap from "@/components/TopMap";
 
 export default function Home() {
  
   return ( 
-    <Suspense fallback={<HomeLoader></HomeLoader>}>
-    <FormBottom/>
-    </Suspense>
+    <><TopMap /><FormBottom /></>
+   
   )
 }
