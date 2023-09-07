@@ -1,4 +1,6 @@
 #map {
+  position: relative;
   width: 100vw;
-  height: 100vh;
+  height: 80vh;
+  border: 5px solid #15172b;
 }

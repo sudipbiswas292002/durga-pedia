@@ -1,4 +1,6 @@
 "use client"
+import '../app/form.css'
+import '../app/globals.css'
 import MyLocationIcon from '@mui/icons-material/MyLocation';
 import { createContext, useContext, useEffect, useRef, useState } from "react";
 import MyContext from './MyContext';
@@ -84,42 +86,41 @@ export default function FormBottom() {
     <>
       <div className="container">
         <form onSubmit={getlatlng}>
-          {coordinates && (
+          {(coordinates.lat && coordinates.lng) && (
             <p>
               Latitude: {coordinates.lat}, Longitude: {coordinates.lng}
             </p>
           )}
           <div className="item1">
-            <div className="form-layout lg">
-              <label className="lg-lbl">Your start location</label>
-              <div className="sm-row">
-                <Autocomplete>
-                  <input ref={address} type="text" className="i-loc"
-                  />
+            <div className="form-layout-1">
+              {/* <label className="lg-lbl">Your start location</label> */}
+              {/* <div className="sm-row"> */}
+              <Autocomplete>
+                <input ref={address} type="text" className="ipStartLoc"
+                  placeholder='Enter your start location' />
+              </Autocomplete>
+              <button className="btnStartLoc" type="submit"
+                color="primary" onClick={GetLocation}
+              >{<MyLocationIcon />}</button>
+              {/* </div> */}
+            </div>
 
-                </Autocomplete>
-                <button className="lc-btn" type="submit"
-                  color="primary" onClick={GetLocation}
-                >{<MyLocationIcon />}</button>
-              </div>
+            <div className="form-layout-2">
+              <label className="labelPandal">Number of Pandals:</label>
+              <input defaultValue={1} className="ipPandal" type="number" min={1} max={9} maxLength={1} />
             </div>
-            <div className="form-layout sm">
-              <label className="sm-lbl">No of pandals</label>
-              <input className="i-nm" type="number" />
+
+            <div className="form-layout-3">
+              <label className="labelCheck">Is your starting point the end point?</label>
+              <input className="ipCheck" type="checkbox" />
             </div>
-            <div className="form-layout chk">
-              <label className="ch-lbl">Start point as your end point</label>
-              <input className="i-ch" type="checkbox" />
-            </div>
-            <div className="form-layout btnsm">
+            <div className="form-layout-4">
               <button className="sbm-btn" type="submit"
-                color="primary"
               >Get Roadmap</button>
             </div>
           </div>
         </form>
       </div>
-
     </>
   )
 }

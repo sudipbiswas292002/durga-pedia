@@ -7,5 +7,5 @@ const Tm = () => {
         </div>
     )
 }
-
+ 
 export default Tm
