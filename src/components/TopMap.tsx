@@ -12,8 +12,10 @@ declare global {
         };
     }
 }
-
-const TopMap: React.FC = () => {
+interface TopMapProps {
+    name: string;   //changes by sam
+  }
+  const TopMap: React.FC<TopMapProps> = ({ name }) => {//changes by sam
     useEffect(() => {
         const map = new window.google.maps.Map(
             document.getElementById("map") as HTMLElement,
@@ -103,12 +105,14 @@ const TopMap: React.FC = () => {
             }
         );
     }, []);
-
+console.log(name);
     return (
+        <>
+        
         <div
             id="map"
             // style={{ width: '100vw', height: '100vh' }}
-        />
+        /></>
     );
 };
 

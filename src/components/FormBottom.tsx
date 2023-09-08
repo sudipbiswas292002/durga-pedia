@@ -12,7 +12,7 @@ import {
   DirectionsRenderer,
 } from '@react-google-maps/api'
 
-export default function FormBottom() {
+export default function FormBottom(props: { onSubmit: any; }) {
   const { setContextData }: any = useContext(MyContext);
   const googleMapsApiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
   console.log(googleMapsApiKey);
@@ -39,6 +39,7 @@ export default function FormBottom() {
             const result = data.results[0];
             const { lat, lng } = result.geometry.location;
             setCoordinates({ lat, lng });
+            props.onSubmit(lat+"|"+lng);
           } else {
             console.log(data);
             setCoordinates({ lat: null, lng: null });
@@ -99,7 +100,7 @@ export default function FormBottom() {
                 <input ref={address} type="text" className="ipStartLoc"
                   placeholder='Enter your start location' />
               </Autocomplete>
-              <button className="btnStartLoc" type="submit"
+              <button className="btnStartLoc" 
                 color="primary" onClick={GetLocation}
               >{<MyLocationIcon />}</button>
               {/* </div> */}
@@ -107,7 +108,7 @@ export default function FormBottom() {
 
             <div className="form-layout-2">
               <label className="labelPandal">Number of Pandals:</label>
-              <input defaultValue={1} className="ipPandal" type="number" min={1} max={9} maxLength={1} />
+              <input defaultValue={1} className="ipPandal" type="number" min={1} max={9} maxLength={1}  />
             </div>
 
             <div className="form-layout-3">
