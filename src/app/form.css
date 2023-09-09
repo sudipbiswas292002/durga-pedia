@@ -9,21 +9,20 @@
   justify-content: center;
   color: white;
   font-family: inherit;
+  background-color: #15172b;
   /* font-family: "Josefin Sans", sans-serif; */
 }
 
-.item1 {
-  /* height: 45vh; */
-  margin-top: auto;
-  padding-inline: 20px;
-  padding-block: 20px;
-  background-color: #15172b;
-  /* border-top: 1px solid rgba(255, 255, 255, 0.3); */
-  box-sizing: border-box;
-  /* border-top-left-radius: 10px;
-  border-top-right-radius: 10px; */
-  /* margin-right: 8px;
-  margin-left: 6px; */
+.expandIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255 255 255 / 0.9);
+  margin-block-end: 7px;
+}
+
+.expandIconRot {
+  transform: rotateX(180deg);
 }
 
 .form-layout-1 {
@@ -35,13 +34,6 @@
   width: 100%;
   gap: 0px;
 }
-
-/* .lg {
-  margin-bottom: 10px;
-}
-.sm {
-  margin-top: 32px;
-} */
 
 .ipStartLoc {
   display: flex;
