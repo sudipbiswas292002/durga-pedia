@@ -13,7 +13,7 @@ import {
   DirectionsRenderer,
 } from '@react-google-maps/api'
 
-export default function FormBottom() {
+export default function FormBottom(props: { onSubmit: any; }) {
   const { setContextData }: any = useContext(MyContext);
   const googleMapsApiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
   console.log(googleMapsApiKey);
@@ -51,6 +51,7 @@ export default function FormBottom() {
             const result = data.results[0];
             const { lat, lng } = result.geometry.location;
             setCoordinates({ lat, lng });
+            props.onSubmit(lat+"|"+lng);
           } else {
             console.log(data);
             setCoordinates({ lat: null, lng: null });
