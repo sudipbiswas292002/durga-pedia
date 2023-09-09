@@ -147,8 +147,16 @@
   color: #eee;
 }
 
+.form-layout-4 {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .sbm-btn {
-  margin-top: 25px;
+  margin: 25px;
+  margin-inline: auto;
   appearance: button;
   backface-visibility: hidden;
   /* background-color: #405cf5; */
@@ -163,6 +171,7 @@
   font-family: inherit;
   /* font-family: -apple-system, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Ubuntu, sans-serif; */
   font-size: 16px;
+  min-width: 85%;
   height: 44px;
   line-height: 1.15;
   outline: none;
@@ -176,7 +185,6 @@
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
-  width: 100%;
 }
 
 .sbm-btn:disabled {

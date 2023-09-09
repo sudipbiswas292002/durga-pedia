@@ -32,7 +32,7 @@ export default function FormBottom(props: { onSubmit: any; }) {
       window.removeEventListener('scroll', handlescroll);
     }
   }, []);
-  console.log(scrollcheck)
+  // console.log(scrollcheck)
   // useEffect(() => {
 
   // }, [addressbool]);
