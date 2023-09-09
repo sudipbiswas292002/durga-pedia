@@ -28,9 +28,9 @@ export default function FormBottom(props: { onSubmit: any; }) {
       setScrollcheck((window.pageYOffset || document.documentElement.scrollTop) / (document.documentElement.scrollHeight - document.documentElement.clientHeight) * 100);
     }
     window.addEventListener('scroll', handlescroll);
-    return () => {
-      window.removeEventListener('scroll', handlescroll);
-    }
+    // return () => {
+    //   window.removeEventListener('scroll', handlescroll);
+    // }
   }, []);
   // console.log(scrollcheck)
   // useEffect(() => {
@@ -51,7 +51,7 @@ export default function FormBottom(props: { onSubmit: any; }) {
             const result = data.results[0];
             const { lat, lng } = result.geometry.location;
             setCoordinates({ lat, lng });
-            props.onSubmit(lat+"|"+lng);
+            props.onSubmit(lat + "|" + lng);
           } else {
             console.log(data);
             setCoordinates({ lat: null, lng: null });
