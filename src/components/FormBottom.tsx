@@ -1,7 +1,8 @@
 "use client"
 import '../app/form.css'
-import '../app/globals.css'
+// import '../app/globals.css'
 import MyLocationIcon from '@mui/icons-material/MyLocation';
+import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import { createContext, useContext, useEffect, useRef, useState } from "react";
 import MyContext from './MyContext';
 import {
@@ -20,7 +21,18 @@ export default function FormBottom(props: { onSubmit: any; }) {
   const [coordinates, setCoordinates] = useState<{ lat: number | null; lng: number | null }>(
     { lat: null, lng: null }
   );
+  const [scrollcheck, setScrollcheck] = useState(0);
 
+  useEffect(() => {
+    const handlescroll = () => {
+      setScrollcheck((window.pageYOffset || document.documentElement.scrollTop) / (document.documentElement.scrollHeight - document.documentElement.clientHeight) * 100);
+    }
+    window.addEventListener('scroll', handlescroll);
+    // return () => {
+    //   window.removeEventListener('scroll', handlescroll);
+    // }
+  }, []);
+  // console.log(scrollcheck)
   // useEffect(() => {
 
   // }, [addressbool]);
@@ -39,7 +51,7 @@ export default function FormBottom(props: { onSubmit: any; }) {
             const result = data.results[0];
             const { lat, lng } = result.geometry.location;
             setCoordinates({ lat, lng });
-            props.onSubmit(lat+"|"+lng);
+            props.onSubmit(lat + "|" + lng);
           } else {
             console.log(data);
             setCoordinates({ lat: null, lng: null });
@@ -92,33 +104,32 @@ export default function FormBottom(props: { onSubmit: any; }) {
               Latitude: {coordinates.lat}, Longitude: {coordinates.lng}
             </p>
           )}
-          <div className="item1">
-            <div className="form-layout-1">
-              {/* <label className="lg-lbl">Your start location</label> */}
-              {/* <div className="sm-row"> */}
-              <Autocomplete>
-                <input ref={address} type="text" className="ipStartLoc"
-                  placeholder='Enter your start location' />
-              </Autocomplete>
-              <button className="btnStartLoc" 
-                color="primary" onClick={GetLocation}
-              >{<MyLocationIcon />}</button>
-              {/* </div> */}
-            </div>
+          <div className={`expandIcon ${scrollcheck > 80 ? "expandIconRot" : ""}`}>{<ExpandLessIcon />}</div>
+          <div className="form-layout-1">
+            {/* <label className="lg-lbl">Your start location</label> */}
+            {/* <div className="sm-row"> */}
+            <Autocomplete>
+              <input ref={address} type="text" className="ipStartLoc"
+                placeholder='Enter your start location' />
+            </Autocomplete>
+            <button className="btnStartLoc" type="submit"
+              color="primary" onClick={GetLocation}
+            >{<MyLocationIcon />}</button>
+            {/* </div> */}
+          </div>
 
-            <div className="form-layout-2">
-              <label className="labelPandal">Number of Pandals:</label>
-              <input defaultValue={1} className="ipPandal" type="number" min={1} max={9} maxLength={1}  />
-            </div>
+          <div className="form-layout-2">
+            <label className="labelPandal">Number of Pandals:</label>
+            <input defaultValue={1} className="ipPandal" type="number" min={1} max={9} maxLength={1} />
+          </div>
 
-            <div className="form-layout-3">
-              <label className="labelCheck">Is your starting point the end point?</label>
-              <input className="ipCheck" type="checkbox" />
-            </div>
-            <div className="form-layout-4">
-              <button className="sbm-btn" type="submit"
-              >Get Roadmap</button>
-            </div>
+          <div className="form-layout-3">
+            <label className="labelCheck">Is your starting point the end point?</label>
+            <input className="ipCheck" type="checkbox" />
+          </div>
+          <div className="form-layout-4">
+            <button className="sbm-btn" type="submit"
+            >Get Roadmap</button>
           </div>
         </form>
       </div>

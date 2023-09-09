@@ -9,21 +9,20 @@
   justify-content: center;
   color: white;
   font-family: inherit;
+  background-color: #15172b;
   /* font-family: "Josefin Sans", sans-serif; */
 }
 
-.item1 {
-  /* height: 45vh; */
-  margin-top: auto;
-  padding-inline: 20px;
-  padding-block: 20px;
-  background-color: #15172b;
-  /* border-top: 1px solid rgba(255, 255, 255, 0.3); */
-  box-sizing: border-box;
-  /* border-top-left-radius: 10px;
-  border-top-right-radius: 10px; */
-  /* margin-right: 8px;
-  margin-left: 6px; */
+.expandIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255 255 255 / 0.9);
+  margin-block-end: 7px;
+}
+
+.expandIconRot {
+  transform: rotateX(180deg);
 }
 
 .form-layout-1 {
@@ -35,13 +34,6 @@
   width: 100%;
   gap: 0px;
 }
-
-/* .lg {
-  margin-bottom: 10px;
-}
-.sm {
-  margin-top: 32px;
-} */
 
 .ipStartLoc {
   display: flex;
@@ -155,8 +147,16 @@
   color: #eee;
 }
 
+.form-layout-4 {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .sbm-btn {
-  margin-top: 25px;
+  margin: 25px;
+  margin-inline: auto;
   appearance: button;
   backface-visibility: hidden;
   /* background-color: #405cf5; */
@@ -171,6 +171,7 @@
   font-family: inherit;
   /* font-family: -apple-system, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Ubuntu, sans-serif; */
   font-size: 16px;
+  min-width: 85%;
   height: 44px;
   line-height: 1.15;
   outline: none;
@@ -184,7 +185,6 @@
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
-  width: 100%;
 }
 
 .sbm-btn:disabled {
