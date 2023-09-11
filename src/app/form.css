@@ -79,23 +79,28 @@
 }
 
 .form-layout-2 {
-  margin-top: 20px;
+  margin-block: 30px;
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: row;
+  flex-direction: column;
   gap: 20px;
 }
 .labelPandal {
-  height: 3.3rem;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 400;
   color: #ffa800;
 }
-
-.ipPandal {
+.form-layout-2 > span {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.divPandal {
   background-color: #303245;
   display: flex;
   align-items: center;
@@ -108,19 +113,24 @@
   border: 3px solid rgba(255, 255, 255, 0.05);
   box-sizing: border-box;
   color: #eee;
-  font-size: 18px;
+  font-size: 20px;
+  cursor: default;
 }
 
-/* Works for Chrome, Safari, Edge, Opera */
-.ipPandal::-webkit-outer-spin-button,
-.ipPandal::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-/* Works for Firefox */
-.ipPandal[type="number"] {
-  -moz-appearance: textfield;
+#minus,
+#plus {
+  background-color: #303245;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 60px;
+  text-align: center;
+  border: 3px solid rgba(255, 255, 255, 0.05);
+  box-sizing: border-box;
+  color: #eee;
+  cursor: pointer;
 }
 
 .form-layout-3 {
@@ -131,8 +141,8 @@
   gap: 10px;
 }
 
-.ipCheck {
-  scale: 1.2;
+#ipCheck {
+  scale: 1.1;
   width: fit-content;
   border-radius: 5px;
   height: 60%;
