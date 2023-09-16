@@ -1,5 +1,4 @@
 "use client"
-import { autoCompleteData } from "@/app/Pandels";
 import { StandaloneSearchBox } from "@react-google-maps/api";
 import { useState } from "react";
 import React from "react";
@@ -84,5 +83,5 @@ const AutoComplete = ({ data }:any) => {
     </div>
   );
 };
-
+// samadrit gandu
 export default AutoComplete;
